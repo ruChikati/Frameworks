@@ -23,6 +23,7 @@ class SFXManager:
             if '.' not in file:
                 self.music[file] = [music for music in os.listdir(f'{self.path}{os.sep}music{os.sep}{file}') if music[0] != '.']
         self.num_channels = num_channels
+        self.game = game
 
     def play(self, name, loops=0, maxtime=0, fade_ms=0):
         try:
@@ -70,5 +71,5 @@ class SFXManager:
         return pygame.mixer.get_num_channels()
 
     @num_channels.setter
-    def num_channels(self, int):
-        pygame.mixer.set_num_channels(int)
+    def num_channels(self, num):
+        pygame.mixer.set_num_channels(num)

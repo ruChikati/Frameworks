@@ -2865,7 +2865,7 @@
      "wood",
      "tiles/wood.png",
      false,
-     true
+     false
     ],
     [
      368,
@@ -2875,7 +2875,7 @@
      "wood",
      "tiles/wood.png",
      false,
-     true
+     false
     ],
     [
      368,
@@ -2885,7 +2885,7 @@
      "wood",
      "tiles/wood.png",
      false,
-     true
+     false
     ],
     [
      368,
@@ -2895,7 +2895,7 @@
      "leaf",
      "tiles/leaf.png",
      false,
-     true
+     false
     ],
     [
      384,
@@ -2905,7 +2905,7 @@
      "leaf",
      "tiles/leaf.png",
      false,
-     true
+     false
     ],
     [
      400,
@@ -2915,7 +2915,7 @@
      "leaf",
      "tiles/leaf.png",
      false,
-     true
+     false
     ],
     [
      400,
@@ -2925,7 +2925,7 @@
      "leaf",
      "tiles/leaf.png",
      false,
-     true
+     false
     ],
     [
      384,
@@ -2935,7 +2935,7 @@
      "leaf",
      "tiles/leaf.png",
      false,
-     true
+     false
     ],
     [
      368,
@@ -2945,7 +2945,7 @@
      "leaf",
      "tiles/leaf.png",
      false,
-     true
+     false
     ],
     [
      352,
@@ -2955,7 +2955,7 @@
      "leaf",
      "tiles/leaf.png",
      false,
-     true
+     false
     ],
     [
      336,
@@ -2965,7 +2965,7 @@
      "leaf",
      "tiles/leaf.png",
      false,
-     true
+     false
     ],
     [
      320,
@@ -2975,7 +2975,7 @@
      "leaf",
      "tiles/leaf.png",
      false,
-     true
+     false
     ],
     [
      336,
@@ -2985,7 +2985,7 @@
      "leaf",
      "tiles/leaf.png",
      false,
-     true
+     false
     ],
     [
      336,
@@ -2995,7 +2995,7 @@
      "leaf",
      "tiles/leaf.png",
      false,
-     true
+     false
     ],
     [
      352,
@@ -3005,7 +3005,7 @@
      "leaf",
      "tiles/leaf.png",
      false,
-     true
+     false
     ],
     [
      352,
@@ -3015,7 +3015,7 @@
      "leaf",
      "tiles/leaf.png",
      false,
-     true
+     false
     ],
     [
      368,
@@ -3025,7 +3025,7 @@
      "leaf",
      "tiles/leaf.png",
      false,
-     true
+     false
     ],
     [
      384,
@@ -3035,7 +3035,7 @@
      "leaf",
      "tiles/leaf.png",
      false,
-     true
+     false
     ],
     [
      400,
@@ -3045,7 +3045,7 @@
      "leaf",
      "tiles/leaf.png",
      false,
-     true
+     false
     ],
     [
      256,

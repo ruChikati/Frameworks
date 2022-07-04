@@ -28,6 +28,6 @@ class Assets:   # TODO, add UI when it's done
 
     def update(self, dt):
         self.sfx.update()
-        self.game.player.update()
         self.worlds.update(dt)
+        self.game.player.update()
         self.camera.update()

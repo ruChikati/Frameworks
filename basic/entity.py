@@ -40,7 +40,7 @@ class Entity:
 class Player(Entity):
 
     def __init__(self, x, y, w, h, num, img, game):
-        super().__init__(x, y, w, h, f'plauer{num}', img, game)
+        super().__init__(x, y, w, h, f'player{num}', img, game)
         self.x = x
         self.y = y
         self.w = w
@@ -55,13 +55,13 @@ class Player(Entity):
         for event in self.game.last_input:  # bug: player collisions not working properly
             if event.type == input.KEYHOLD:
                 if event.key == input.S:
-                    self.move((0, 2), self.game.assets.worlds.get_active_world().level.get_collision_mesh(), self.game.dt)
+                    self.move((0, 2), self.game.assets.worlds.get_active_world().level.collision_mesh, self.game.dt)
                 if event.key == input.W:
-                    self.move((0, -2), self.game.assets.worlds.get_active_world().level.get_collision_mesh(), self.game.dt)
+                    self.move((0, -2), self.game.assets.worlds.get_active_world().level.collision_mesh, self.game.dt)
                 if event.key == input.A:
-                    self.move((-2, 0), self.game.assets.worlds.get_active_world().level.get_collision_mesh(), self.game.dt)
+                    self.move((-2, 0), self.game.assets.worlds.get_active_world().level.collision_mesh, self.game.dt)
                 if event.key == input.D:
-                    self.move((2, 0), self.game.assets.worlds.get_active_world().level.get_collision_mesh(), self.game.dt)
+                    self.move((2, 0), self.game.assets.worlds.get_active_world().level.collision_mesh, self.game.dt)
                 if event.key == input.RETURN:
                     self.x, self.y = 0, 0
                     self.rect.x, self.rect.y = 0, 0

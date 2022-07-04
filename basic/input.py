@@ -10,14 +10,16 @@ KEYS = BACKSPACE, TAB, CLEAR, RETURN, PAUSE, ESCAPE, SPACE, EXCLAIM, DOUBLEQUOTE
 MODS = MOD_NONE, MOD_LSHIFT, MOD_RSHIFT, MOD_SHIFT, MOD_LCTRL, MOD_RCTRL, MOD_CTRL, MOD_LALT, MOD_RALT, MOD_ALT, MOD_LMETA, MOD_RMETA, MOD_META, MOD_CAPSLOCK, MOD_NUMLOCK, MOD_MODE = pygame.KMOD_NONE, pygame.KMOD_LSHIFT, pygame.KMOD_RSHIFT, pygame.KMOD_SHIFT, pygame.KMOD_LCTRL, pygame.KMOD_RCTRL, pygame.KMOD_CTRL, pygame.KMOD_LALT, pygame.KMOD_RALT, pygame.KMOD_ALT, pygame.KMOD_LMETA, pygame.KMOD_RMETA, pygame.KMOD_META, pygame.KMOD_CAPS, pygame.KMOD_NUM, pygame.KMOD_MODE
 TYPENAMES = ['QUIT', 'KEYDOWN', 'KEYUP', 'KEYDOWN2', 'KEYUP2', 'MOUSEMOVE', 'MOUSEWHEEL', 'MOUSEDOWN', 'MOUSEUP', 'WINDOWMOTION', 'VIDEORESIZE', 'DROPFILE', 'JOYAXISMOTION', 'JOYBALLMOTION', 'JOYHATMOTION', 'JOYBUTTONDOWN', 'JOYBUTTONUP', 'CONTROLLERADDED', 'CONTROLLERREMOVED', 'FINGERMOTION', 'FINGERUP', 'FINGERDOWN', 'FINGERUP2', 'FINGERDOWN2', 'MOUSEUP2', 'MOUSEDOWN2', 'WINDOWMOVED', 'NONEEVENT']
 
-KEY_LAG_TIME = 0.8
+KEY_LAG_TIME = 0.8  # amount of time in between two accepted keystrokes to count as KEY2, in seconds
 
 controllers = [pygame.joystick.Joystick(c) for c in range(pygame.joystick.get_count())]
 
 
 class Event:
 
-    def __init__(self, type, dict={}, **attributes):
+    def __init__(self, type, dict=None, **attributes):
+        if dict is None:
+            dict = {}
         if dict:
             self.attr = dict
         elif attributes:

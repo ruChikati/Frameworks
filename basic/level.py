@@ -88,8 +88,18 @@ class Chunk:
 
     def get_collision_mesh(self):
         tiles = [tile.rect for tile in self.tiles if tile.is_solid]
-        print(tiles)
-
+        for i in range(len(tiles) // 20):
+            for tile1 in tiles:
+                for tile2 in tiles:
+                    if tile1 == tile2:
+                        continue
+                    if (tile2.topleft == tile1.topright and tile2.h == tile1.h) or (tile2.bottomleft == tile1.topleft and tile2.w == tile1.w) or (tile2.bottomright == tile1.bottomleft and tile2.h == tile1.h) or (tile2.topright == tile1.bottomright and tile2.w == tile1.w) or (tile1.topleft == tile2.topright and tile1.h == tile2.h) or (tile1.bottomleft == tile2.topleft and tile1.w == tile2.w) or (tile1.bottomright == tile2.bottomleft and tile1.h == tile2.h) or (tile1.topright == tile2.bottomright and tile1.w == tile2.w):
+                        tiles.append(tile1.union(tile2))
+                        if tile1 in tiles:
+                            tiles.remove(tile1)
+                        if tile2 in tiles:
+                            tiles.remove(tile2)
+        return tiles
 
     @property
     def rect(self):
@@ -105,6 +115,7 @@ class Level:
         self.chunks_dict = {chunk.chunk_pos: chunk for chunk in self.chunks}
         self.game = game
         self.chunk_size = CHUNK_SIZE
+        self.collision_mesh = self.get_collision_mesh()
 
     def get_all_tiles(self):
         return_list = []
@@ -118,12 +129,12 @@ class Level:
         if not chunks:
             for chunk in self.chunks:
                 for tile in chunk.collision_mesh:
-                    return_list.append(tile.rect)
+                    return_list.append(tile)
         else:
             for pos in chunks:
-                for chunk in self.chunks_dict[pos]:
-                    for tile in chunk.collision_mesh:
-                        return_list.append(tile.rect)
+                chunk = self.chunks_dict[pos]
+                for tile in chunk.collision_mesh:
+                    return_list.append(tile)
         return return_list
 
     def update(self, surf=None):

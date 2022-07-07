@@ -60,4 +60,3 @@ class Player(Entity):
                     self.rect.x, self.rect.y = 0, 0
         self.anims[self.action].play(self.game.dt)
         self.anims[self.action].render_main((self.x, self.y))
-        #self.game.assets.camera.render(self.img, (self.x, self.y))

@@ -22,13 +22,11 @@ def bezier_curve(def_points, speed=0.01):
 class CameraCutscene:
 
     def __init__(self, path):
-        if path[0] == '.':
-            raise ValueError('File must be a JSON file')
         self.path = path
         self.name = path.split(os.sep)[-1].split('.')[0]
-        self.data = funcs.read_json(path)
-        self.points = self.data['points']
-        self.curve = bezier_curve(self.points, self.data['speed'])
+        with open(self.path, 'r') as data:
+            self.points = [float(num) for num in data.read().split(';')[0].split(',')]
+            self.curve = bezier_curve(self.points, float(data.read().split(';')[-1]))
 
 
 class Camera:
@@ -60,9 +58,9 @@ class Camera:
         self.display.fill(self.bgc)
         self.screen.fill(self.bgc)
         for surf_pos in self._to_blit:
-            self.screen.blit(surf_pos[0], surf_pos[1])
+            self.screen.blit(surf_pos[0], (surf_pos[1][0] + self.scroll[0], surf_pos[1][1] + self.scroll[1]))
         self._to_blit *= 0
-        funcs.centre_blit(pygame.transform.scale(self.screen, (self.screen.get_width() * self.zoom, self.screen.get_height() * self.zoom)), self.display, self.display.get_rect().center)
+        self.display.blit(pygame.transform.scale(self.screen, (self.screen.get_width() * self.zoom, self.screen.get_height() * self.zoom)), (0, 0))
         pygame.display.flip()
 
     def play_cutscene(self, name):
@@ -100,7 +98,7 @@ class Camera:
 
     def center(self, pos):
         if not self._locked:
-            self.scroll = [self.screen.get_width() // 2 + pos[0], self.screen.get_height() // 2 + pos[1]]
+            self.scroll = [self.screen.get_width() // 2 - pos[0], self.screen.get_height() // 2 - pos[1]]
 
     def lock(self):
         self._locked = True

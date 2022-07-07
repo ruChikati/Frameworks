@@ -46,15 +46,17 @@ class Animation:
         self.frame_durations = funcs.sum_list(self.config['frames'])
         self.frames = []
         for frame in self.frame_paths:
-            if frame.split('.')[-1] in ['jpg', 'png']:
-                self.frames.append(pygame.image.load(f'{self.path}{os.sep}{frame}').convert())
+            if frame.split('.')[-1] == 'png':
+                frame = pygame.image.load(f'{self.path}{os.sep}{frame}').convert()
+                frame.set_colorkey((1, 1, 1))
+                self.frames.append(frame)
             elif frame.split('.')[-1] == 'json':
                 pass
             else:
                 raise FileTypeError(frame.split('.')[-1])
-        if len(self.frames) > len(self.frame_paths):
+        if len(self.frames) > len(self.frame_paths) + 1:
             self.config['frames'] += [5 for i in range(len(self.frames) - len(self.frame_paths))]
-        elif len(self.frames) < len(self.frame_paths):
+        elif len(self.frames) < (len(self.frame_paths) - 1):
             raise LengthError('Not enough frames in animation')
         self._get_img()
 
@@ -68,7 +70,7 @@ class Animation:
         if self.frame_durations[-1] < self.frame:
             self.img = self.frames[-1]
 
-    def render(self, surf, pos, offset=[0, 0]):
+    def render(self, surf, pos, offset=(0, 0)):
         img = self.img
         if self.rotation:
             img = pygame.transform.rotate(img, self.rotation)
@@ -76,6 +78,15 @@ class Animation:
             surf.blit(img, (pos[0] - offset[0] - img.get_width() // 2, pos[1] - offset[1] - img.get_height() // 2))
         else:
             surf.blit(img, (pos[0] - offset[0], pos[1] - offset[1]))
+
+    def render_main(self, pos, offset=(0, 0)):
+        img = self.img
+        if self.rotation:
+            img = pygame.transform.rotate(img, self.rotation)
+        if self.config['centre']:
+            self.game.assets.camera.render(img, (pos[0] - offset[0] - img.get_width() // 2, pos[1] - offset[1] - img.get_height() // 2))
+        else:
+            self.game.assets.camera.render(img, (pos[0] - offset[0], pos[1] - offset[1]))
 
     def play(self, dt):
         if not self.paused:
@@ -105,8 +116,9 @@ class AnimationManager:
         self.path = path
         self.game = game
         self.anims = {}
-        for dir in os.listdir(path):
-            self.anims[dir] = Animation(f'{path}{os.sep}{dir}', self.game)
+        for directory in os.listdir(path):
+            if directory[0] != '.':
+                self.anims[directory] = Animation(f'{path}{os.sep}{directory}', self.game)
 
     def new(self, path):
         self.anims[path.split(os.sep)[-1]] = Animation(path, self.game)

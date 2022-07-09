@@ -31,5 +31,4 @@ class Assets:   # TODO, add UI when it's done
         self.worlds.update(dt)
         self.game.player.update()
         self.camera.center((self.game.player.x, self.game.player.y))
-        print(self.camera.scroll)
         self.camera.update()

@@ -40,9 +40,10 @@ class Entity:
 
 class Player(Entity):
 
-    def __init__(self, x, y, w, h, img, game):
+    def __init__(self, x, y, w, h, img, game, gravity=False):
         super().__init__(x, y, w, h, f'player', img, game)
         self.anims = {anim.split(self.name)[-1]: self.game.assets.anims.anims[anim] for anim in self.game.assets.anims.anims if self.name in anim}
+        self.gravity = gravity
 
     def update(self):   # TODO: only get chunks in vicinity of player
         for event in self.game.last_input:
@@ -58,5 +59,9 @@ class Player(Entity):
                 if event.key == input.RETURN:
                     self.x, self.y = 0, 0
                     self.rect.x, self.rect.y = 0, 0
+
+        if self.gravity:
+            self.move((0, self.game.dt ** 2), self.game.assets.worlds.get_active_world().level.collision_mesh, self.game.dt)
+            
         self.anims[self.action].play(self.game.dt)
         self.anims[self.action].render_main((self.x, self.y))

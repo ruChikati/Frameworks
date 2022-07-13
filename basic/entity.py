@@ -21,7 +21,7 @@ class Entity:
     def update(self):
         self.game.assets.camera.render(self.img, (self.x, self.y))
 
-    def move(self, movement, tiles, dt):
+    def move(self, movement, tiles, dt):    # TODO: work on velocity based approach, move gets called every update(), returns collision directions
         self.rect.x += movement[0] * dt
         collision_tiles = [tile for tile in tiles if self.rect.colliderect(tile)]
         for tile in collision_tiles:

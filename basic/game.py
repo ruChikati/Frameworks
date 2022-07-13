@@ -21,7 +21,7 @@ class Game:
         self.last_input = []
         player_surf = pygame.Surface((24, 32))
         player_surf.fill((255, 255, 255))
-        self.player = entity.Player(0, 0, 24, 32, player_surf, self)
+        self.player = entity.Player(0, 0, 24, 32, player_surf, self, gravity=True)
 
     def update(self):
         self.dt = time.time() - self.lt

@@ -16,6 +16,7 @@ class Entity:
         self.img = img
         self.game = game
         self.action = 'idle'
+        self.vel = [0, 0]
 
     def update(self):
         self.game.assets.camera.render(self.img, (self.x, self.y))

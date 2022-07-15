@@ -45,8 +45,9 @@ class Camera:
         self.current_points = None
 
         for file in os.listdir(self.cutscene_path):
-            cutscene = CameraCutscene(file)
-            self.cutscenes[cutscene.name] = cutscene
+            if file[0] != '.':
+                cutscene = CameraCutscene(file)
+                self.cutscenes[cutscene.name] = cutscene
 
     def update(self):
         if self.current_points is not None:

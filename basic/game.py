@@ -22,6 +22,7 @@ class Game:
         player_surf = pygame.Surface((24, 32))
         player_surf.fill((255, 255, 255))
         self.player = entity.Player(0, 0, 24, 32, player_surf, self, gravity=True)
+        self.test_particle_burst = self.assets.particle.ParticleBurst([100, 100], 10, 10, ((255, 255, 0),), 600, 1, self)
 
     def update(self):
         self.dt = time.time() - self.lt

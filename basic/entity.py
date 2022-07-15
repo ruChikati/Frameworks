@@ -60,9 +60,8 @@ class Player(Entity):
                 if event.key == input.RETURN:
                     self.x, self.y = 0, 0
                     self.rect.x, self.rect.y = 0, 0
-
-        if self.gravity:
-            self.move((0, self.game.dt ** 2), self.game.assets.worlds.get_active_world().level.collision_mesh, self.game.dt)
+        # if self.gravity:
+        #     self.move((0, self.game.dt ** 2), self.game.assets.worlds.get_active_world().level.collision_mesh, self.game.dt)
             
         self.anims[self.action].play(self.game.dt)
         self.anims[self.action].render_main((self.x, self.y))

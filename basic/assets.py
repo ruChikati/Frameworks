@@ -11,6 +11,7 @@ import font
 import general_funcs
 import input
 import level
+import particle
 import sfx
 
 
@@ -24,11 +25,13 @@ class Assets:   # TODO, add UI when it's done
         self.anims = animation.AnimationManager(anim_path, game)
         self.fonts = font.FontManager(font_path)
         self.input = input.Input(game, 128)
+        self.particle = particle
         self.game = game
 
     def update(self, dt):
         self.sfx.update()
         self.worlds.update(dt)
         self.game.player.update()
+        self.game.test_particle_burst.update(dt)
         self.camera.center((self.game.player.x, self.game.player.y))
         self.camera.update()

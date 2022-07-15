@@ -71,6 +71,7 @@ class Font:
             x += img[0].get_width()
         return return_img
 
+
 SysFont = pygame.font.SysFont
 
 
@@ -78,7 +79,7 @@ class FontManager:
 
     def __init__(self, path, bar_colour=(128, 128, 128), colourkey=(0, 0, 0)):
         self.path = path
-        self.fonts = {file.split('.')[0]: Font(path + os.sep + file, bar_colour, colourkey) for file in os.listdir(path)}
+        self.fonts = {file.split('.')[0]: Font(path + os.sep + file, bar_colour, colourkey) for file in os.listdir(path) if file[0] != '.'}
 
     def __getitem__(self, item):
         return self.fonts[item]

@@ -60,4 +60,3 @@ class ParticleBurst:    # TODO: finish this, use sin and cos since speed is floa
             self.particles *= 0
         for particle in self.particles:
             particle.update(self.time if self.time > 0 else 1, self.starting_time if self.starting_time > 0 else 1, dt, vel_update)
-

@@ -49,7 +49,10 @@ class ParticleBurst:    # TODO: finish this, use sin and cos since speed is floa
         self.fades = fade
         if type == 'burst':
             for i in range(amount):
-                self.particles.append(Particle(random.choice(self.colours), self.middle, [random.randint(-speed * 10, speed * 10) / 10, random.randint(-speed * 10, speed * 10) / 10], size, self.game, shape, width, shrink, fade))
+                self.particles.append(Particle(random.choice(self.colours), [self.middle[0], self.middle[1]], [random.randint(-speed * 10, speed * 10) / 10, random.randint(-speed * 10, speed * 10) / 10], size, self.game, shape, width, shrink, fade))
+                # [self.middle[0], self.middle[1]], because it didn't work with self.middle
+        for particle in self.particles:
+            print(particle.pos, particle.vel)
 
     def update(self, dt, vel_update=(0, 0)):
         if self.time > 0:
@@ -59,4 +62,4 @@ class ParticleBurst:    # TODO: finish this, use sin and cos since speed is floa
         else:
             self.particles *= 0
         for particle in self.particles:
-            particle.update(self.time if self.time > 0 else 1, self.starting_time if self.starting_time > 0 else 1, dt, vel_update)
+            particle.update(self.time if self.time >= 0 else 1, self.starting_time if self.starting_time >= 0 else 1, dt, vel_update)

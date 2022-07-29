@@ -2,6 +2,7 @@
 import random
 
 import pygame
+import math
 
 
 class Particle:
@@ -36,7 +37,7 @@ class Particle:
 
 class ParticleBurst:    # TODO: finish this, use sin and cos since speed is float, maybe add gravity option
 
-    def __init__(self, pos, size, amount, colours, time_to_live, speed, game, type='burst', shape='circle', width=0, shrink=True, fade=False):
+    def __init__(self, pos, size, amount, colours, time_to_live, speed, game, type='burst', shape='circle', width=0, shrink=False, fade=True):
         self.particles = []
         self.starting_time = time_to_live
         self.time = time_to_live
@@ -48,11 +49,9 @@ class ParticleBurst:    # TODO: finish this, use sin and cos since speed is floa
         self.shrinks = shrink
         self.fades = fade
         if type == 'burst':
-            for i in range(amount):
-                self.particles.append(Particle(random.choice(self.colours), [self.middle[0], self.middle[1]], [random.randint(-speed * 10, speed * 10) / 10, random.randint(-speed * 10, speed * 10) / 10], size, self.game, shape, width, shrink, fade))
+            for i in range(amount): # TODO: make it a circle
+                self.particles.append(Particle(random.choice(self.colours), [self.middle[0], self.middle[1]], [speed * math.cos(random.random() * 2 * math.pi) * math.sqrt(random.random()), speed * math.sin(random.random() * 2 * math.pi) * math.sqrt(random.random())], size, self.game, shape, width, shrink, fade))
                 # [self.middle[0], self.middle[1]], because it didn't work with self.middle
-        for particle in self.particles:
-            print(particle.pos, particle.vel)
 
     def update(self, dt, vel_update=(0, 0)):
         if self.time > 0:

@@ -50,13 +50,13 @@ class Player(Entity):
         for event in self.game.last_input:
             if event.type == input.KEYHOLD:
                 if event.key == input.S:
-                    self.move((0, 2), self.game.assets.worlds.get_active_world().level.collision_mesh, self.game.dt)
+                    self.move((0, 4), self.game.assets.worlds.get_active_world().level.collision_mesh, self.game.dt)
                 if event.key == input.W:
-                    self.move((0, -2), self.game.assets.worlds.get_active_world().level.collision_mesh, self.game.dt)
+                    self.move((0, -4), self.game.assets.worlds.get_active_world().level.collision_mesh, self.game.dt)
                 if event.key == input.A:
-                    self.move((-2, 0), self.game.assets.worlds.get_active_world().level.collision_mesh, self.game.dt)
+                    self.move((-4, 0), self.game.assets.worlds.get_active_world().level.collision_mesh, self.game.dt)
                 if event.key == input.D:
-                    self.move((2, 0), self.game.assets.worlds.get_active_world().level.collision_mesh, self.game.dt)
+                    self.move((4, 0), self.game.assets.worlds.get_active_world().level.collision_mesh, self.game.dt)
                 if event.key == input.RETURN:
                     self.x, self.y = 0, 0
                     self.rect.x, self.rect.y = 0, 0

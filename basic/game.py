@@ -47,4 +47,4 @@ class Game:
             self.update()
 
 
-Game(120, 'Test').run()
+Game(60, 'Test').run()
